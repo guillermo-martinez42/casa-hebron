@@ -240,7 +240,7 @@ ul {
 /* Hero Section */
 #hero {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?q=80&w=1974');
+  background-image: linear-gradient(rgba(72, 72, 72, 0.4), rgba(0, 0, 0, 0.2)), url('img/lago-amatitlan.JPG');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
