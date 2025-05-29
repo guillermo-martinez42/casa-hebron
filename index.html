@@ -352,9 +352,12 @@
 
       <div class="contact-container">
         <div class="contact-form-container">
-          <form id="contactForm" class="contact-form">
+          <form id="contactForm" class="contact-form" method="POST" action="https://formsubmit.co/hebron.casa@gmail.com">
+            <!-- Optional: turn off captcha -->
+            <input type="hidden" name="_captcha" value="false">
+
             <div class="form-group">
-              <label for="name">Nombre </label>
+              <label for="name">Nombre</label>
               <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
             </div>
             <div class="form-group">
@@ -406,6 +409,9 @@
               <button type="submit" class="btn btn-primary btn-block">Enviar Solicitud</button>
             </div>
           </form>
+
+
+
         </div>
         <div class="contact-info">
           <div class="info-card">
@@ -550,6 +556,23 @@
       <div class="toast-message">Mensaje enviado con éxito. ¡Gracias!</div>
     </div>
     <button class="toast-close"><i data-feather="x"></i></button>
+  </div>
+
+  <!-- Gracias Popup Modal -->
+  <div id="graciasModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i data-feather="check-circle" class="modal-icon"></i>
+        <h2>¡Gracias por contactarnos!</h2>
+      </div>
+      <div class="modal-body">
+        <p>Hemos recibido tu solicitud y nos pondremos en contacto contigo muy pronto.</p>
+        <p>Revisaremos la disponibilidad para las fechas solicitadas y te enviaremos toda la información necesaria.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="closeModal" class="btn btn-primary">Cerrar</button>
+      </div>
+    </div>
   </div>
 
   <!-- Back to Top Button -->

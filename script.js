@@ -192,23 +192,70 @@ function initContactForm() {
   const contactForm = document.getElementById('contactForm');
   const toast = document.getElementById('toast');
   const toastClose = document.querySelector('.toast-close');
+  const graciasModal = document.getElementById('graciasModal');
+  const closeModalBtn = document.getElementById('closeModal');
   
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // In a real application, you would send the form data to your backend here
-    // For demo purposes, we'll just show a success message
+    // Get form data
+    const formData = new FormData(contactForm);
     
-    // Show success toast
-    toast.classList.add('show');
-    
-    // Hide toast after 5 seconds
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 5000);
-    
-    // Reset form
-    contactForm.reset();
+    try {
+      // Submit form to FormSubmit
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        // Show modal popup
+        graciasModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Initialize feather icons for the modal
+        feather.replace();
+      } else {
+        // If submission fails, show error toast
+        toast.querySelector('.toast-message').textContent = 'Hubo un error al enviar el mensaje. Por favor intenta de nuevo.';
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 5000);
+      }
+    } catch (error) {
+      // If there's a network error, show error toast
+      toast.querySelector('.toast-message').textContent = 'Hubo un error al enviar el mensaje. Por favor intenta de nuevo.';
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 5000);
+    }
+  });
+  
+  // Close modal when clicking the close button
+  closeModalBtn.addEventListener('click', () => {
+    graciasModal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  });
+  
+  // Close modal when clicking outside the modal content
+  graciasModal.addEventListener('click', (e) => {
+    if (e.target === graciasModal) {
+      graciasModal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+  });
+  
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && graciasModal.classList.contains('show')) {
+      graciasModal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
   });
   
   // Close toast when clicking the close button
